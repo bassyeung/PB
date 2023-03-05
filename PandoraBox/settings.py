@@ -75,7 +75,7 @@ DATABASES = {
         'NAME': 'PandoraBox2',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'http://0.0.0.0:6059'
+        'HOST': 'http://0.0.0.0'
     }
 }
 
