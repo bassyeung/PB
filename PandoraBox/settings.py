@@ -71,11 +71,8 @@ WSGI_APPLICATION = 'PandoraBox.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'PandoraBox2',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'http://0.0.0.0'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
