@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+        <ol>
+            <li><a href="">Home</a></li>
+            <li>Register</li>
+        </ol>
+        <h2>Register</h2>
+        </div>
+    </section>
+    <!-- End Breadcrumbs -->
+    <!--Register form-->
+    <div class="container">
+        <br>
+        <form action="{% url 'register' %}" method="POST">
+            {% csrf_token %}
+            <br>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" id="username" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="first_name">First name</label>
+                <input type="text" class="form-control" name="first_name" id="first_name" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="last_name">Last name</label>
+                <input type="text" class="form-control" name="last_name" id="last_name" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" name="email" id="email" required>
+                <small class="form-text text-muted">your email will not be shared</small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="password2">Confirm password</label>
+                <input type="password" class="form-control" name="password2" id="password2" required>
+            </div>
+            <br>
+            
+            <input type="submit" value="Register" class="btn btn-secondary btn-block" />
+        </form>
+        <br>
+    </div>
+{% endblock %}

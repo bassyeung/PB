@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+        <ol>
+            <li><a href="">Home</a></li>
+            <li>Content</li>
+        </ol>
+        <h2>Content - Insert</h2>
+        </div>
+    </section>
+    <!-- End Breadcrumbs -->
+    <!--Register form                        {x% url 'insertb' %x} --> 
+    <div class="container">
+        <br>
+        <form action="contentinsert" method="POST">
+            {% csrf_token %}
+            <br>
+            <div class="form-group">
+                <label for="channel">Channel</label>
+                <input type="text" class="form-control" name="channel" id="channel" value="" >
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="user">User</label>
+                <input type="text" class="form-control" name="user" id="user" value="" >
+            </div>
+            <br>
+              
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" name="title" id="title" required>
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" name="description" id="description" >
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="level">Level</label>
+                <input type="text" class="form-control" name="level" id="level" >
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="image">Image</label>
+                <input type="file" class="form-control" name="image" id="image" >
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="video">Video</label>
+                <input type="file" class="form-control" name="video" id="video" >
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="videolink">Video Link</label>
+                <input type="text" class="form-control" name="videolink" id="videolink" >
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="youtubelink">Youtube Link</label>
+                <input type="text" class="form-control" name="youtubelink" id="youtubelink" >
+            </div>
+            <br>
+            <div class="form-group">
+                <label for="dateupload">Date Upload</label>
+                <input type="datetime" class="form-control" name="dateupload" id="dateupload" >
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label for="tag">Tag</label>
+                <input type="text" class="form-control" name="tag" id="tag" >
+            </div>
+            <br>
+
+            <input type="submit" value="insert" class="btn btn-secondary btn-block" />
+        </form>
+        <br>
+    </div>
+{% endblock %}

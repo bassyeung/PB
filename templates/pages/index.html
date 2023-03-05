@@ -1,0 +1,283 @@
+{% extends "base.html" %}
+<!-- extends base.html -->
+{% load static %}
+<!-- load static -->
+{% block content %}
+<!-- block content -->
+
+<!-- ======= Breadcrumbs ======= --> 
+<section class="breadcrumbs">
+  <div class="container">
+    <ol>
+      <li><a href="">Home</a></li>
+      <!-- li Channels /li -->
+    </ol>
+    <!-- h2 Channels /h2 -->
+  </div>
+</section>
+<!-- End Breadcrumbs -->
+ 
+ 
+
+  <main id="main">
+ 
+
+<section class="inner-page">
+  <div class="container">
+    <!---->
+    <section id="portfolio" class="portfolio">
+      <div class="container" data-aos="fade-up">
+        <header class="section-header">
+          <p>Channel</p>
+        </header>
+
+        <h3>
+          <center>Popular Searches</center>
+        </h3>
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-finance">Finance</li>
+              <li data-filter=".filter-style">Style</li>
+              <li data-filter=".filter-it">I.T.</li>             
+              <li data-filter=".filter-music">Music</li>
+              <li data-filter=".filter-games">Games</li>
+              <li data-filter=".filter-fashion">Fashion</li>
+              <li data-filter=".filter-food">Food</li>
+
+            </ul>
+          </div>
+        </div>
+
+        <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
+          <!---->
+          {% if channels %} {% for channel in channels %}
+          {% if channel.category == "IT" %}
+          <div class="col-lg-4 col-md-6 portfolio-item filter-it">
+            {% elif channel.category == "music" %}
+            <div class="col-lg-4 col-md-6 portfolio-item filter-music">
+              {% elif channel.category == "games" %}
+              <div class="col-lg-4 col-md-6 portfolio-item filter-games">
+                {% elif channel.category == "finance" %}
+                <div class="col-lg-4 col-md-6 portfolio-item filter-finance">
+                  {% elif channel.category == "style" %}
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-style">
+                    {% elif channel.category == "fashion" %}
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-fashion">
+                      {% elif channel.category == "food" %}
+                      <div class="col-lg-4 col-md-6 portfolio-item filter-food">
+                {% else %}
+                <div class="col-lg-4 col-md-6 portfolio-item filter-other">
+                  {% endif %}
+                  <div class="portfolio-wrap">
+                    <img src="{{channel.icon.url}}" class="img-fluid" alt="" />
+                    <div class="portfolio-info">
+                      <h4>{{channel.title}}</h4>
+                      <p>{{channel.user}}</p>
+                      <div class="portfolio-links">
+
+                        <a href="{% url 'channel' channel.id channel.link %}" title="More Details"><i
+                            class="bi bi-link"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!---->
+                {% endfor %} {% else %}
+                <p>No Channel Available</p>
+                {% endif %}
+                <!---->
+              </div>
+            </div>
+
+          </div>
+          <!-- pagination -->
+          <div class="blog">
+            <div class="blog-pagination">
+              {% if channels.has_other_pages %}
+              <!-- class="pagination" -->
+              <ul class="justify-content-center pagination">
+                {% if channels.has_previous %}
+                <li class="page-items">
+                  <a href="?page={{channels.previous_page_number}}" class="page-link">&laquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="">&laquo;</a>
+                </li>
+                {% endif %}
+                <!-- loop the database content -->
+                {% for i in channels.paginator.page_range %}
+                <!-- break the page and show the page number -->
+                {% if channels.number == i %}
+                <li class="page-item active">
+                  <a class="page-link">{{i}}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                  <a href="?page={{i}}" class="page-link">{{i}}</a>
+                </li>
+                {% endif %}
+                <!-- end if -->
+                {% endfor %}
+                <!-- right arrow -->
+                {% if channels.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{channels.next_page_number}}">&raquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disable">
+                  <a class="page-link">&raquo;</a>
+                </li>
+                {% endif %}
+              </ul>
+              {% endif %}
+              <!-- end loop -->
+            </div>
+          </div>
+          <!-- End blog entries list -->
+    </section>
+    <!-- End Portfolio Section -->
+    <!-- end block -->
+ 
+ 
+    
+   
+
+        <!-- ------------------------------------------------------------------------------------------------------- -->
+    <!-- ======= Search Section ======= -->
+    <section id="search" class="search">
+<div class="container">
+    <br/>
+	<div class="row justify-content-center">
+                        <div class="col-12 col-md-10 col-lg-8">
+                            <form class="card card-sm" action="{% url 'search' %}">
+                                <div class="card-body row no-gutters align-items-center">
+                                    <div class="col-auto">
+                                        <i class="fas fa-search h4 text-body"></i>
+                                    </div>
+                                    <!--end of col-->
+                                    <div class="col">
+                                     <input class="form-control form-control-lg form-control-borderless" type="search" name="keywords" placeholder="Search topics or keywords">
+                                    </div>
+                                    <!--end of col-->
+                                    <div class="col-auto">
+                                        <button class="btn btn-lg btn-primary" type="submit">Search</button>
+                                    </div>
+                                    <!--end of col-->
+                                </div>
+                            </form>
+                        </div>
+                        <!--end of col-->
+                    </div>
+</div>
+    </section><!-- End Search Section -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       <!-- ------------------------------------------------------------------------------------------------------------------------------- -->       
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+
+      <div class="container" data-aos="fade-up">
+        <div class="row gx-0">
+
+          <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <div class="content">
+              <h3>Who We Are</h3>
+              <h2>PandoraBox is a website for people to share thier creation and reward by their fans</h2>
+              <p>
+                PandoraBox, you can share your creation to viewers. You can also show your product free in PandoraBox. Some people can also build their career in PandoraBox.
+              </p>
+              <div class="text-center text-lg-start">
+                <a href="/" class="btn-read-more d-inline-flex align-items-center justify-content-center align-self-center">
+                  <span>Home</span>
+                  <i class="bi bi-arrow-right"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6 d-flex align-items-center" data-aos="zoom-out" data-aos-delay="200">
+            <img src="{% static 'assets/img/about.jpg' %}" class="img-fluid" alt="">
+          </div>
+
+        </div>
+      </div>
+
+    </section><!-- End About Section -->
+
+        <!-- ----------------------------------------------------------------------------------------------------------------------------- -->
+     
+         <!-- ---------------------------------------------------------------------------------------------------- -->
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+
+      <div class="container" data-aos="fade-up">
+
+        <header class="section-header">
+          <h2>Contact</h2>
+          <p>Contact Us</p>
+        </header>
+
+        <div class="row gy-4">
+
+          <div class="col-lg-12">
+
+            <div class="row gy-4">
+              <div class="col-md-6">
+                <div class="info-box">
+                  <i class="bi bi-geo-alt"></i>
+                  <h3>Address</h3>
+                  <p>30/F International Financial Centre, 8 Financial Street, Central, Hong Kong</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box">
+                  <i class="bi bi-telephone"></i>
+                  <h3>Call Us</h3>
+                  <p>Tel: +852 28802688<br>Fax: +852 28802689</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box">
+                  <i class="bi bi-envelope"></i>
+                  <h3>Email Us</h3>
+                  <p>info@pandorabox.com<br>support@pandorabox.com</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="info-box">
+                  <i class="bi bi-clock"></i>
+                  <h3>Open Hours</h3>
+                  <p>Monday - Friday<br>9:00AM - 05:00PM</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+ 
+        </div>
+
+      </div>
+
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+
+<!-- end block -->
+{% endblock %}

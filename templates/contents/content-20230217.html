@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+<!-- extends base.html -->
+{% load static %}
+<!-- load static -->
+{% block content %}
+<!-- block content -->
+
+<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Home</a></li>
+      <li>Channels</li>
+    </ol>
+    <h2>Content</h2>
+  </div>
+</section>
+<!-- End Breadcrumbs -->
+<div class="container">
+<!---->
+{% if content %}
+<!---->
+{% for content in content %}
+<!---->
+<br>
+<img src="{{content.user.user_icon.url}}" />
+<br /><hr>
+user : {{content.user}}
+<br /><hr>
+content title : {{content.title}}
+<br /><hr>
+content description : {{content.description}}
+<br /><hr>
+content image : <img src="{{content.image.url}}" />
+<br /><hr>
+content dateupload : {{content.dateupload}}
+<br /><hr>
+content tag : {{content.tag}}
+<br /><hr>
+<!---->
+{% endfor %}
+<!---->
+{% else %}
+<!---->
+<p>No Content</p>
+<!---->
+</div>
+{% endif %}
+<!-- end block -->
+{% endblock %}

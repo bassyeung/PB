@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs">
+  <div class="container">
+    <ol>
+      <li><a href="{% url 'channels' %}">Home</a></li>
+      <li><a href="{% url 'channels' %}">Content</a></li>
+    </ol>
+    <h2>xxx{{content.title}} yyy   {{content.tag}}  </h2>
+  </div>
+</section>
+<!-- End Breadcrumbs -->
+
+
+<div class="container">
+
+<form method="POST" class="post-form" action="contentupdate/{{content.id}}">  
+        {% csrf_token %}  
+    <div class="container">  
+     <br>  
+     <div class="form-group row">  
+       <label class="col-sm-1 col-form-label"></label>  
+       <div class="col-sm-4">  
+          <h3>content update</h3>  
+       </div>  
+     </div>  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Title:</label>  
+    <div class="col-sm-4">  
+        <input type="text" name="title" id="id_title" required maxlength="200" value="{{ content.title }}" />  
+    </div>  
+  </div>  
+  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Youtube Link:</label>  
+    <div class="col-sm-4">  
+        <input type="text" name="youtubelink" id="youtubelink" maxlength="250" value="{{ content.youtubelink }}" />  
+    </div>  
+  </div>  
+  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Description:</label>  
+    <div class="col-sm-4">  
+        <input type="text" name="description" id="id_description" required maxlength="500" value="{{ content.description }}" />  
+    </div>  
+  </div>  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Level:</label>  
+    <div class="col-sm-4">  
+        <input type="text" name="level" id="id_level" value="{{ content.level}}" />  
+    </div>  
+  </div>  
+  <div class="form-group row">  
+    <label class="col-sm-2 col-form-label">Tag:</label>  
+    <div class="col-sm-4">  
+        <input type="text" name="tag" id="id_tag" maxlength="200" value="{{ content.tag }}" />  
+    </div>  
+  </div>  
+  
+  <div class="form-group row">  
+    <label class="col-sm-1 col-form-label"></label>  
+    <div class="col-sm-4">  
+    <button type="submit" class="btn btn-success">Update</button>  
+    </div>  
+  </div>  
+    </div>  
+</form>  
+
+<br><br>
+after update, will go to creatorbox 
+<br><br>
+ 
+<a href="">index</a><br>
+ <a href="/creatorbox">back to creatorbox</a> 
+</div>
+{% endblock %}

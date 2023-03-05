@@ -1,0 +1,26 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block extrahead %}
+    <link rel="shortcut icon" href="{% static 'assets/img/pink.svg' %}" />
+{% endblock %}
+
+{% block branding %}
+{# load static block #}
+
+<h1 id="head">
+    <img 
+        src="{% static 'assets/img/pink.svg' %}"
+        alt=""
+        height="50"
+        width="80"
+        class="brand_img"
+    />
+    PandoraBox Admin 
+</h1>
+<!-- - /templates/admin/base_site.html -->
+{% endblock %}
+
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'css/admin.css' %}" />
+{% endblock %}

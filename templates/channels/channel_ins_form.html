@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+<!-- extends base.html -->
+{% load static %}
+<!-- load static -->
+{% block content %}
+<!-- block content -->
+
+<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Home</a></li>
+      <li>Channels</li>
+    </ol>
+    <h2>Channel -Insert</h2>
+  </div>
+</section>
+<!-- End Breadcrumbs -->
+
+ 
+<section class="inner-page">
+  <div class="container">
+    <!---->
+    <section id="portfolio" class="portfolio">
+      <div class="container" data-aos="fade-up">
+        <header class="section-header">
+          <p>Channel - Insert</p>
+        </header>
+
+
+ 
+<form method="post"  enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Insert</button>
+</form>
+
+ 
+    </section>
+    <!-- End Portfolio Section -->
+    <!-- end block -->
+    {% endblock %}
+  </div>
+</section>
+ 

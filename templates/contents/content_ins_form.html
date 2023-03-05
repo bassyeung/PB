@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+<!-- extends base.html -->
+{% load static %}
+<!-- load static -->
+{% block content %}
+<!-- block content -->
+
+<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Home</a></li>
+      <li>Contents</li>
+    </ol>
+    <h2>Content -Insert</h2>
+  </div>
+</section>
+<!-- End Breadcrumbs -->
+
+ 
+<section class="inner-page">
+  <div class="container">
+    <!---->
+    <section id="portfolio" class="portfolio">
+      <div class="container" data-aos="fade-up">
+        <header class="section-header">
+          <p>Content - Insert</p>
+        </header>
+
+
+ 
+<form method="post"  enctype="multipart/form-data">
+        {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Insert</button>
+</form>
+
+ 
+    </section>
+    <!-- End Portfolio Section -->
+    <!-- end block -->
+ 
+  </div>
+</section>
+ 
+<section id="register" class="bg-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card">
+            <div class="card-header bg-primary text-white">
+              <h4><i class="fas fa-user-plus"></i> Content - Insert </h4>
+            </div>
+            <div class="card-body">
+            {x% include 'partials/_alerts.html' %x}
+
+
+
+            <form method="post"  enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="channel_id">Channel ID</label>
+                  <input
+                    type="text"
+                    name="channel_id"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="owner_id">Owner ID</label>
+                  <input
+                    type="text"
+                    name="owner_id"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="catergory">Catergory</label>
+                  <input
+                    type="text"
+                    name="catergory"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <input
+                    type="text"
+                    name="description"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="contentimage">Content Image</label>
+                  <input
+                    type="image"
+                    name="comntentimage"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="video">Video</label>
+                  <input
+                    type="file"
+                    name="video"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="videourl">Video Link</label>
+                  <input
+                    type="text"
+                    name="videourl"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="youtubelurl">Youtube Link</label>
+                  <input
+                    type="text"
+                    name="youtubeurl"
+                    class="form-control"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="dateupload">Date Upload</label>
+                  <input
+                    type="date"
+                    name="dateupload"
+                    class="form-control"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="y">Tag</label>
+                  <input
+                    type="text"
+                    name="text"
+                    class="form-control"
+                  />
+                </div>
+
+
+
+                <input
+                  type="submit"
+                  value="Register"
+                  class="btn btn-secondary btn-block" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

@@ -1,0 +1,340 @@
+<!-- #====================================================================== -->
+<!-- # filename......: templates/contents/content.html                       -->
+<!-- # purpose.......: to display a particular content from model Content    -->
+<!-- # date created..: 2023-2-12                                             -->
+<!-- # date modified.: 2023-2-18                                             -->
+<!-- # modify detail.: add author info at the bottom                         -->
+<!-- # version.......: 2.0                                                   -->
+<!-- # file creator..: Jacky Chan                                            -->
+<!-- # detail info...: See at the end of the file                            -->
+<!-- #====================================================================== -->
+
+{% extends "base.html" %}
+<!-- extends base.html -->
+{% load static %}
+<!-- load static -->
+{% block content %}
+<!-- block content -->
+{% if content %}
+<!---->
+{% for content in content %}
+
+<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs">
+  <div class="container">
+    <ol>
+      <li><a href="/">Home</a></li>
+      <li>Content</li>
+    </ol>
+    <h2>{{ content.title }}</h2>
+  </div>
+</section><!-- End Breadcrumbs -->
+ 
+{% if content.user.id == user.id  %}   <!--  if same user -->
+<!-- author bio -->
+<section id="blog" class="blog">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row">
+      <div class="col-lg-12 entries">
+        <div class="blog-author d-flex align-items-center">
+          <img src="{{content.channel.icon.url}}" class="rounded-circle float-left" alt="" />
+          <div>
+            <h4>{{content.channel}}</h4>
+            <div class="social-links">
+              <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+              <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+              <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+            </div>
+            <p>{{content.channel.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 entries">
+        <div class="plyr__video-embed" id="player-youtube">
+          <iframe src="{{content.youtubelink}}"></iframe>
+        </div>
+        <script>
+          const playerYoutube = new Plyr("#player-youtube", {
+            controls: [
+              "play-large", // The large play button in the center
+              "restart", // Restart playback
+              "rewind", // Rewind by the seek time (default 10 seconds)
+              "play", // Play/pause playback
+              "fast-forward", // Fast forward by the seek time (default 10 seconds)
+              "progress", // The progress bar and scrubber for playback and buffering
+              "current-time", // The current time of playback
+              "duration", // The full duration of the media
+              "mute", // Toggle mute
+              "volume", // Volume control
+              "captions", // Toggle captions
+              "settings", // Settings menu
+              "pip", // Picture-in-picture (currently Safari only)
+              "airplay", // Airplay (currently Safari only)
+              "download", // Show a download button with a link to either the current source or a custom URL you specify in your options
+              "fullscreen", // Toggle fullscreen
+            ],
+          });
+        </script>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- End blog author bio -->
+<!-- hidden -->
+{% elif content.level > subscription %}
+<section id="blog" class="blog">
+  <div class="container" data-aos="fade-up">
+    <div class="row">
+      <div class="col-lg-12 entries">
+        <div class="blog-author d-flex align-items-center">
+          <img src="{{content.channel.icon.url}}" class="rounded-circle float-left" alt="" />
+          <div>
+            <h4>{{content.channel}}</h4>
+            <div class="social-links">
+              <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+              <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+              <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+            </div>
+            <p>{{content.channel.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% else %}
+<!-- author bio -->
+<section id="blog" class="blog">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row">
+      <div class="col-lg-12 entries">
+        <div class="blog-author d-flex align-items-center">
+          <img src="{{content.channel.icon.url}}" class="rounded-circle float-left" alt="" />
+          <div>
+            <h4>{{content.channel}}</h4>
+            <div class="social-links">
+              <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+              <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+              <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+            </div>
+            <p>{{content.channel.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-12 entries">
+        <div class="plyr__video-embed" id="player-youtube">
+          <iframe src="{{content.youtubelink}}"></iframe>
+        </div>
+        <script>
+          const playerYoutube = new Plyr("#player-youtube", {
+            controls: [
+              "play-large", // The large play button in the center
+              "restart", // Restart playback
+              "rewind", // Rewind by the seek time (default 10 seconds)
+              "play", // Play/pause playback
+              "fast-forward", // Fast forward by the seek time (default 10 seconds)
+              "progress", // The progress bar and scrubber for playback and buffering
+              "current-time", // The current time of playback
+              "duration", // The full duration of the media
+              "mute", // Toggle mute
+              "volume", // Volume control
+              "captions", // Toggle captions
+              "settings", // Settings menu
+              "pip", // Picture-in-picture (currently Safari only)
+              "airplay", // Airplay (currently Safari only)
+              "download", // Show a download button with a link to either the current source or a custom URL you specify in your options
+              "fullscreen", // Toggle fullscreen
+            ],
+          });
+        </script>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- End blog author bio -->
+<!-- hidden -->
+{% endif %}
+
+<!-- ======= Blog Single Section ======= -->
+
+<section id="blog" class="blog">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row">
+
+      <div class="col-lg-8 entries">
+        {% if content.user.id == user.id  %}
+        <article class="entry entry-single">
+
+          <div class="entry-img"> <!-- show content image, title -->
+            <img src="{{ content.image.url }}" alt="content.image" class="img-fluid">
+          </div>
+          <h2 class="entry-title">
+            <a href="blog-single.html">{{ content.title }}</a>
+          </h2>
+
+          <div class="entry-meta"> <!-- show author name, dateupload -->
+            <ul>
+              <li class="d-flex align-items-center"><i class="bi bi-person"></i>
+                  {{ content.channel.link }}</li>
+              <li class="d-flex align-items-center"><i class="bi bi-clock"></i> <time
+                    datetime="2023-02-05">{{ content.dateupload }}</time></li>
+
+            </ul>
+          </div>
+
+          <div class="entry-content">
+
+            <blockquote>
+              <p>
+                Description
+              </p>
+            </blockquote>
+
+            <p> {{ content.description }} </p>
+          </div>
+
+
+        </article><!-- End blog entry -->
+        {% elif content.level > subscription %}
+        
+        <article class="entry entry-single">
+
+          <div class="entry-img img-filter"> <!-- show content image, title -->
+            <img src="{{ content.image.url }}" alt="content.image" class="img-fluid">
+          </div>
+        </article>
+        <h1><font color=red>please subscribe to view content</font></h1>
+        <h2><a href="/channels/{{ content.channel.id}}/{{ content.channel.link}}#membership">click here to subscribe</a></h2><br>
+       
+        {% else %}              <!-- show content if subscribe -->
+        <article class="entry entry-single">
+
+          <div class="entry-img"> <!-- show content image, title -->
+            <img src="{{ content.image.url }}" alt="content.image" class="img-fluid">
+          </div>
+          <h2 class="entry-title">
+            <a href="blog-single.html">{{ content.title }}</a>
+          </h2>
+
+          <div class="entry-meta"> <!-- show author name, dateupload -->
+            <ul>
+              <li class="d-flex align-items-center"><i class="bi bi-person"></i>
+                  {{ content.channel.link }}</li>
+              <li class="d-flex align-items-center"><i class="bi bi-clock"></i><time
+                    datetime="2023-02-05">{{ content.dateupload }}</time></li>
+
+            </ul>
+          </div>
+
+          <div class="entry-content">
+
+            <blockquote>
+              <p>
+                Description
+              </p>
+            </blockquote>
+
+            <p> {{ content.description }} </p>
+          </div>
+
+
+        </article><!-- End blog entry -->
+        {% endif %}
+
+        <div class="blog-author d-flex align-items-center">
+          <!--    assets/img/logo.png -->
+          <img src="{{content.user.user_icon.url}}" class="rounded-circle float-left" alt="deutschland">
+          <div>
+            <h4>{{ content.user }}</a></h4>
+            <div class="social-links">
+              <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+              <a href="https://facebook.com/#"><i class="bi bi-facebook"></i></a>
+              <a href="https://instagram.com/#"><i class="biu bi-instagram"></i></a>
+            </div>
+            <p> {{ content.user.country }} </p>
+          </div>
+        </div><!-- End blog author bio -->
+        {% endfor %}
+        <!---->
+        {% else %}
+        <!---->
+        <p>No Content</p>
+        <!---->
+
+        {% endif %}
+
+
+      </div><!-- End blog entries list -->
+
+      <div class="col-lg-4"> <!-- blog sidebar -->
+        <div class="sidebar"> <!-- right-hand side side bar -->
+          <h3 class="sidebar-title">Search</h3>
+          <div class="sidebar-item search-form">
+            <form action="search">
+                <input type="search" name="keywords">
+                <button type="submit"><i class="bi bi-search"></i></button>
+            </form>
+          </div><!-- End sidebar search formn-->
+        </div><!-- End sidebar -->
+      </div><!-- End blog sidebar -->
+
+    </div>
+
+  </div>
+</section><!-- End Blog Single Section -->
+
+</main><!-- End #main -->
+
+
+
+
+<!-- end block -->
+{% endblock %}
+
+
+<!-- #============================================================================= -->
+<!-- # date comment....: 2023-2-12 10:00                                            -->
+<!-- # comment by......: Jacky Chan                                                 -->
+<!-- # filename........: templates/contents/content.html                            -->
+<!-- # version.........: 1.0                                                        -->
+<!-- # purpose.........: to display a particular content from model Content         -->
+<!-- # language........: Django, python                                             -->
+<!-- # server os.......: ubuntu 22.10                                               -->
+<!-- # server location.: Tseung Kwan O, iAdvantage Data Centre Section A, Rack 23   -->
+<!-- #                                                                              -->
+<!-- # The logic of this program                                                    -->
+<!-- # for loop                                                                     -->
+<!-- #      show channel info                                                       -->
+<!-- #      show content video                                                      -->
+<!-- #      show content image                                                      -->
+<!-- #      show description                                                        -->
+<!-- #      show author info                                                        -->
+<!-- #                                                                              -->
+<!-- # show right-hand sidebar                                                      -->
+<!-- #      search form                                                             -->
+<!-- #      popular channel                                                         -->
+<!-- #      recent content                                                          -->
+<!-- #      tag                                                                     -->
+<!-- #                                                                              -->
+<!-- #============================================================================= -->
+
+<!-- #============================================================================= -->
+<!-- # date comment....: 2023-2-18 18:00                                            -->
+<!-- # comment by......: Jacky Chan                                                 -->
+<!-- # version.........: 2.0                                                        -->
+<!-- # modify detail...: to display the author detail at the lower part             -->
+<!-- # ============================================================================ -->
+
+<!-- --------------------------- end of the file ---------------------------------- -->

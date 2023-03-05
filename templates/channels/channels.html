@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+<!-- extends base.html -->
+{% load static %}
+<!-- load static -->
+{% block content %}
+<!-- block content -->
+
+<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs">
+  <div class="container">
+    <ol>
+      <li><a href="index.html">Home</a></li>
+      <li>Channels</li>
+    </ol>
+    <h2>Channels</h2>
+  </div>
+</section>
+<!-- End Breadcrumbs -->
+
+<section class="inner-page">
+  <div class="container">
+    <!---->
+    <section id="portfolio" class="portfolio">
+      <div class="container" data-aos="fade-up">
+        <header class="section-header">
+          <p>Channel</p>
+        </header>
+
+        <h3>
+          <center>Popular Searches</center>
+        </h3>
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-it">I.T.</li>
+              <li data-filter=".filter-finance">Finance</li>
+              <li data-filter=".filter-style">Style</li>
+              <li data-filter=".filter-music">Music</li>
+              <li data-filter=".filter-games">Games</li>
+
+              <li data-filter=".filter-fashion">Fashion</li>
+              <li data-filter=".filter-food">Food</li>
+
+            </ul>
+          </div>
+        </div>
+
+        <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
+          <!---->
+          {% if channels %} {% for channel in channels %}
+          {% if channel.category == "IT" %}
+          <div class="col-lg-4 col-md-6 portfolio-item filter-it">
+            {% elif channel.category == "music" %}
+            <div class="col-lg-4 col-md-6 portfolio-item filter-music">
+              {% elif channel.category == "games" %}
+              <div class="col-lg-4 col-md-6 portfolio-item filter-games">
+                {% elif channel.category == "finance" %}
+                <div class="col-lg-4 col-md-6 portfolio-item filter-finance">
+                  {% elif channel.category == "style" %}
+                  <div class="col-lg-4 col-md-6 portfolio-item filter-style">
+                    {% elif channel.category == "fashion" %}
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-fashion">
+                      {% elif channel.category == "food" %}
+                      <div class="col-lg-4 col-md-6 portfolio-item filter-food">
+                {% else %}
+                <div class="col-lg-4 col-md-6 portfolio-item filter-other">
+                  {% endif %}
+                  <div class="portfolio-wrap">
+                    <img src="{{channel.icon.url}}" class="img-fluid" alt="" />
+                    <div class="portfolio-info">
+                      <h4>{{channel.title}}</h4>
+                      <p>{{channel.user}}</p>
+                      <div class="portfolio-links">
+
+                        <a href="{% url 'channel' channel.id channel.link %}" title="More Details"><i
+                            class="bi bi-link"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!---->
+                {% endfor %} {% else %}
+                <p>No Channel Available</p>
+                {% endif %}
+                <!---->
+              </div>
+            </div>
+
+          </div>
+          <!-- pagination -->
+          <div class="blog">
+            <div class="blog-pagination">
+              {% if channels.has_other_pages %}
+              <!-- class="pagination" -->
+              <ul class="justify-content-center pagination">
+                {% if channels.has_previous %}
+                <li class="page-items">
+                  <a href="?page={{channels.previous_page_number}}" class="page-link">&laquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="">&laquo;</a>
+                </li>
+                {% endif %}
+                <!-- loop the database content -->
+                {% for i in channels.paginator.page_range %}
+                <!-- break the page and show the page number -->
+                {% if channels.number == i %}
+                <li class="page-item active">
+                  <a class="page-link">{{i}}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                  <a href="?page={{i}}" class="page-link">{{i}}</a>
+                </li>
+                {% endif %}
+                <!-- end if -->
+                {% endfor %}
+                <!-- right arrow -->
+                {% if channels.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{channels.next_page_number}}">&raquo;</a>
+                </li>
+                {% else %}
+                <li class="page-item disable">
+                  <a class="page-link">&raquo;</a>
+                </li>
+                {% endif %}
+              </ul>
+              {% endif %}
+              <!-- end loop -->
+            </div>
+          </div>
+          <!-- End blog entries list -->
+    </section>
+    <!-- End Portfolio Section -->
+    <!-- end block -->
+    {% endblock %}
+  </div>
+</section>

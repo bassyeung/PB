@@ -1,0 +1,491 @@
+{% extends "base.html" %}
+<!-- extends base.html -->
+{% load static %}
+<!-- load static -->
+{% load humanize %}
+<!-- -->
+{% block content %}
+<!-- block content -->
+
+<!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs">
+  <div class="container">
+    <ol>
+      <li><a href="{% url 'channels' %}">Home</a></li>
+      <li><a href="{% url 'channels' %}">Channel</a></li>
+    </ol>
+    <h2>{{channel.title}}</h2>
+  </div>
+</section>
+<!-- End Breadcrumbs -->
+
+<!-- author bio -->
+<section id="blog" class="blog">
+  <div class="container" data-aos="fade-up">
+    <div class="blog-author align-items-center">
+      <div class="clcard">
+        <div
+          class="clcard-header"
+          style="background-image: url({{channel.banner.url}});"
+        >
+          <div class="clcard-photo">
+            <img src="{{channel.user.user_icon.url}}" alt="" />
+          </div>
+        </div>
+        <div class="clcard-body">
+          <h3 class="clcard-name">{{channel.user}}</h3>
+          <div>
+            <div class="social-links clcard-name">
+              <a href="https://twitters.com/#"><i class="bi bi-twitter"></i></a>
+              <a href="https://facebook.com/#"
+                ><i class="bi bi-facebook"></i
+              ></a>
+              <a href="https://instagram.com/#"
+                ><i class="biu bi-instagram"></i
+              ></a>
+            </div>
+          </div>
+          <p class="clcard-description">{{channel.description}}</p>
+        </div>
+        <div class="col-lg-12 entries">
+          <div class="plyr__video-embed" id="player-youtube">
+            <iframe src="{{channel.video}}"></iframe>
+          </div>
+          <script>
+            const playerYoutube = new Plyr("#player-youtube", {
+              controls: [
+                "play-large", // The large play button in the center
+                "restart", // Restart playback
+                "rewind", // Rewind by the seek time (default 10 seconds)
+                "play", // Play/pause playback
+                "fast-forward", // Fast forward by the seek time (default 10 seconds)
+                "progress", // The progress bar and scrubber for playback and buffering
+                "current-time", // The current time of playback
+                "duration", // The full duration of the media
+                "mute", // Toggle mute
+                "volume", // Volume control
+                "captions", // Toggle captions
+                "settings", // Settings menu
+                "pip", // Picture-in-picture (currently Safari only)
+                "airplay", // Airplay (currently Safari only)
+                "download", // Show a download button with a link to either the current source or a custom URL you specify in your options
+                "fullscreen", // Toggle fullscreen
+              ],
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End blog author bio -->
+
+<!-- ======= Pricing Section ======= -->
+{% if channel.user.id == user.id %} {% else %}
+<section id="pricing" class="pricing">
+  <div
+    class="container"
+    id="membership"
+    data-aos="fade-up"
+    data-bs-spy="scroll"
+  >
+    <header class="section-header">
+      <h2>
+        <div>Join Now</div>
+      </h2>
+      <p>Select a membership level</p>
+    </header>
+
+    <div class="row gy-4" data-aos="fade-left">
+      <!-- data-aos-delay="100" "200" "300"-->
+      <!---->
+      {% if memberships %}
+      <!---->
+      {% for membership in memberships %}
+      <!---->
+      <div class="col-lg-3 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+        <div class="box">
+          <span class="featured">Level {{membership.level}}</span>
+          <h3 style="color: #07d5c0">{{membership.title}}</h3>
+          <div class="price">
+            <sup>$</sup>{{membership.price | intcomma}}<span> / mo</span>
+          </div>
+          <div class="entry-img">
+            <img
+              src="{{membership.pic.url}}"
+              class="img-fluid"
+              style="max-width: 100%; height: 200px; width: auto\9"
+              alt=""
+            />
+          </div>
+          <div class="p-3 bg-light" style="max-height: 70px; overflow-y: scroll; text-align: left;">{{membership.description | linebreaksbr}} </div>
+          <br />
+          <!---->
+          {% if membership.level <= subscription %}
+          <!---->
+          <a class="btn-bought">Bought</a>
+          <!---->
+          {% else %}
+          <!---->
+          {% if user.is_authenticated %}
+          <!---->
+          <a
+            class="btn-buy"
+            href="#membership_modal"
+            data-toggle="modal"
+            data-membership-level="{{membership.level}}"
+            >Buy</a
+          >
+          {% else %}
+          <!---->
+          <a class="btn-buy" data-toggle="modal" data-target="#login">Buy</a>
+          {% endif %}
+          <!---->
+          {% endif %}
+          <!---->
+        </div>
+      </div>
+      <!---->
+      {% endfor %} {% else %}
+      <p>No Membership</p>
+      {% endif %}
+      <!---->
+    </div>
+  </div>
+</section>
+{% endif %}
+<!-- End Pricing Section -->
+<!-- ======= Counts Section ======= -->
+<section id="counts" class="counts">
+  <div class="container" data-aos="fade-up">
+    <header class="section-header">
+      <h2>Unlock exclusive pandora boxes</h2>
+      <p>Unlock exclusive pandora boxes</p>
+    </header>
+    <div class="row gy-4">
+      <div class="col-lg-3 col-md-6">
+        <div class="count-box">
+          <i class="bi bi-journal-richtext" style="color: #ee6c20"></i>
+          <div>
+            <span
+              data-purecounter-start="0"
+              data-purecounter-end="{{contentsLV}}"
+              data-purecounter-duration="1"
+              class="purecounter"
+            ></span>
+            <p>All</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="count-box">
+          <i class="bi bi-box-fill" style="color: #62a9e4"></i>
+          <div>
+            <span
+              data-purecounter-start="0"
+              data-purecounter-end="{{contentsLV1}}"
+              data-purecounter-duration="1"
+              class="purecounter"
+            ></span>
+            <p>Level 1</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="count-box">
+          <i class="bi bi-box2-heart-fill" style="color: #e4e462"></i>
+          <div>
+            <span
+              data-purecounter-start="0"
+              data-purecounter-end="{{contentsLV2}}"
+              data-purecounter-duration="1"
+              class="purecounter"
+            ></span>
+            <p>Level 2</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6">
+        <div class="count-box">
+          <i class="bi bi-gem" style="color: #c70a0d"></i>
+          <div>
+            <span
+              data-purecounter-start="0"
+              data-purecounter-end="{{contentsLV3}}"
+              data-purecounter-duration="1"
+              class="purecounter"
+            ></span>
+            <p>Level 3</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Counts Section -->
+
+<!-- ======= Blog Section ======= -->
+<section id="blog" class="blog">
+  <div class="container" data-aos="fade-up" id="contentlist">
+    <div class="row">
+      <div class="col-lg-8 entries">
+        <!-- Content-->
+        <!---->
+        {% if contents %}
+        <!---->
+        {% for content in contents %}
+        <article class="entry">
+          {% if channel.user.id == user.id %}
+          <div class="entry-img">
+            <img src="{{content.image.url}}" alt="" class="img-fluid" />
+          </div>
+
+          <h2 class="entry-title">
+            <a href="#">{{content.title}}</a>
+          </h2>
+          {% elif content.level <= subscription %}
+          <div class="entry-img">
+            <img src="{{content.image.url}}" alt="" class="img-fluid" />
+          </div>
+
+          <h2 class="entry-title">
+            <a href="#">{{content.title}}</a>
+          </h2>
+          {% else %}
+          <div class="entry-img img-filter">
+            <img src="{{content.image.url}}" alt="" class="img-fluid" />
+          </div>
+
+          <h2 class="entry-title">
+            <a href="#membership">{{content.title}}</a>
+          </h2>
+          {% endif %}
+          <div class="entry-meta">
+            <ul>
+              <li class="d-flex align-items-center">
+                <i class="bi bi-person"></i>
+                <a href="#">{{channel.link}}</a>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="bi bi-clock"></i>
+                <a href="#"
+                  ><time datetime="2020-01-01"
+                    >{{content.dateupload | naturalday}}</time
+                  ></a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="entry-content">
+            <div class="overflow-hidden p-3" style="max-height: 78px">
+              <p>{{content.description}}</p>
+            </div>
+            <br />
+            {% if channel.user.id == user.id %}
+            <!---->
+
+            <div class="read-more">
+              <a href="{% url 'content' content.id %}">Read More</a>
+            </div>
+            {% elif content.level <= subscription %}
+            <!---->
+
+            <div class="read-more">
+              <a href="{% url 'content' content.id %}">Read More</a>
+            </div>
+            <!-- a href="{% url 'content' content.id %}" -->
+            {% else %}
+            <!---->
+            <div class="text-center">
+              <a class="btn btn-warning btn-lg" href="#membership" role="button"
+                >Join Now</a
+              >
+            </div>
+            <div class="read-more bi bi-lock-fill">Locked</div>
+            {% endif %}
+          </div>
+        </article>
+
+        {% endfor %} {% else %}
+        <p>No Content</p>
+        {% endif %}
+        <!-- End blog entry -->
+
+        <!-- .blog .blog-pagination" -->
+        <div class="blog-pagination">
+          {% if contents.has_other_pages %}
+          <!-- class="pagination" -->
+          <ul class="justify-content-center pagination">
+            {% if contents.has_previous %}
+            <li class="page-items">
+              <a
+                href="?page={{contents.previous_page_number}}#contentlist"
+                class="page-link"
+                >&laquo;</a
+              >
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+              <a class="page-link" href="">&laquo;</a>
+            </li>
+            {% endif %}
+            <!-- loop the database content -->
+            {% for i in contents.paginator.page_range %}
+            <!-- break the page and show the page number -->
+            {% if contents.number == i %}
+            <li class="page-item active">
+              <a class="page-link">{{i}}</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+              <a href="?page={{i}}#contentlist" class="page-link">{{i}}</a>
+            </li>
+            {% endif %}
+            <!-- end if -->
+            {% endfor %}
+            <!-- right arrow -->
+            {% if contents.has_next %}
+            <li class="page-item">
+              <a
+                class="page-link"
+                href="?page={{contents.next_page_number}}#contentlist"
+                >&raquo;</a
+              >
+            </li>
+            {% else %}
+            <li class="page-item disable">
+              <a class="page-link">&raquo;</a>
+            </li>
+            {% endif %}
+          </ul>
+          {% endif %}
+          <!-- end loop -->
+        </div>
+      </div>
+      <!-- End blog entries list -->
+
+      <div class="col-lg-4">
+        <div class="sidebar">
+          <h3 class="sidebar-title">Search</h3>
+          <div class="sidebar-item search-form">
+            <form action="{% url 'searchchannelcontent' %}">
+              <input type="search" name="keywords" />
+              <input type="hidden" name="cid" value="{{channel.id}}" />
+              <button type="submit"><i class="bi bi-search"></i></button>
+            </form>
+          </div>
+          <!-- End sidebar search formn-->
+
+          <h3 class="sidebar-title">Recent Posts</h3>
+          <div class="sidebar-item recent-posts">
+            <!-- Recent Posts -->
+            {% if recent_contents %} {% for rcontent in recent_contents %}
+            <div class="post-item clearfix">
+              <img src="{{rcontent.image.url}}" alt="" />
+              <h4>
+                <a href="{% url 'content' rcontent.id %}">{{rcontent.title}}</a>
+              </h4>
+              <time datetime="2020-01-01">{{rcontent.dateupload}}</time>
+            </div>
+            {% endfor %}{% else%} {% endif %}
+          </div>
+          <!-- End sidebar recent posts-->
+        </div>
+        <!-- End sidebar -->
+      </div>
+      <!-- End blog sidebar -->
+    </div>
+  </div>
+</section>
+<!-- End Blog Section -->
+<!-- Member Modal -->
+<div class="modal fade" id="membership_modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="MembershipLabel">Buy</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- add method within form tab -->
+        <!---->
+        <form action="{% url 'subscription' %}" method="POST">
+          {% csrf_token %}
+          <!-- add realtor email -->
+          <!-- add listing id -->
+          <input type="hidden" name="channel_id" value="{{channel.id}}" />
+          <input type="hidden" name="channel_url" value="{{channel.link}}" />
+
+          <div class="form-group">
+            <label for="" class="col-form-label">Channel :</label>
+            <input
+              type="text"
+              name=""
+              value="{{channel.title}}"
+              style="border-width: 0px; border: none; pointer-events: none"
+            />
+          </div>
+          <div class="form-group">
+            <label for="" class="col-form-label">Owner :</label>
+            <input
+              type="text"
+              name=""
+              value="{{channel.user}}"
+              style="border-width: 0px; border: none; pointer-events: none"
+            />
+          </div>
+          <div class="form-group">
+            <label for="membership_level" class="col-form-label">Level :</label>
+            <input
+              type="text"
+              name="membership_level"
+              value=""
+              style="border-width: 0px; border: none; pointer-events: none"
+            />
+          </div>
+
+          <hr />
+          <input type="submit" value="Buy" class="btn btn-block btn-primary" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal -->
+
+<script></script>
+<!-- Login Modal -->
+<div class="modal fade" id="login" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="inquiryModalLabel">Login or Register</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="" method="POST">
+          <a class="btn btn-block btn-primary" href="{% url 'login' %}">
+            <i class="fas fa-sign-in-alt"></i> Login</a
+          >
+          <hr />
+          <a class="btn btn-block btn-primary" href="{% url 'register' %}">
+            <i class="fas fa-user-plus"></i> Register</a
+          >
+          <br />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end modal -->
+<!-- End Portfolio Section -->
+<!-- end block -->
+{% endblock %}

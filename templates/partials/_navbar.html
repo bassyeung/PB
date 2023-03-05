@@ -1,0 +1,52 @@
+<nav id="navbar" class="navbar">
+  <ul>
+    <li><a class="nav-link scrollto" href="/">Home</a></li>
+    <li><a class="nav-link scrollto" href="/#about">About</a></li>
+    <li><a class="nav-link scrollto" href="/channels">Popular</a></li>
+    <li><a class="nav-link scrollto" href="/#search">Search</a></li>
+    <li class="dropdown">
+      <a href="#"><span>Support</span> <i class="bi bi-chevron-down"></i></a>
+      <ul>
+        <li><a href="/#about">About us</a></li>
+        <li><a href="/support#services">Services</a></li>
+        <li><a href="/support#tc">Terms of service</a></li>
+        <li><a href="/support#privacy">Privacy policy</a></li>
+        <li><a href="/#contact">Contact</a></li>
+      </ul>
+    </li>
+    <li>
+      <a class="getstarted scrollto" href="/creatorbox">Get Started</a>
+    </li>
+    {% if user.is_authenticated %}
+    <li {% if 'dashboard' in request.path %} class="nav-item mr-3 active"
+    {% else %}
+    class="nav-item mr-3" {% endif %} >
+    
+    <a class="nav-link" href="{% url 'creatorbox' %}">Welcome {{user.username}}(dashboard)</a>
+    </li>
+    <!-- add logout -->
+    <li class='nav-item mr-3'>
+    <a href="javascript:{document.getElementById('logout').submit()}" class="nav-link">
+    <i class="fas fa-sign-out-alt"></i>Logout </a>
+    <form action="{% url 'logout' %}" method="POST" id="logout">
+    {% csrf_token %}
+    <input type="hidden">
+    </form>
+    </li>
+
+    {% else %}
+  <li class="nav-item mr-3 {% if 'register' in request.path %}active{% endif %}">
+        <a class="nav-link" href="{% url 'register' %}">
+          <i class="fas fa-user-plus"></i> Register</a>
+      </li>
+ <li class="nav-item mr-3 {% if 'login' in request.path %}active{% endif %}">
+        <a class="nav-link" href="{% url 'login' %}">
+          <i class="fas fa-sign-in-alt"></i> Login</a>
+      </li>
+      {% endif %}
+
+
+  </ul>
+  <i class="bi bi-list mobile-nav-toggle"></i>
+</nav>
+<!-- .navbar -->

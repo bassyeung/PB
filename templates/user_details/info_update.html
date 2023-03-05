@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+        <ol>
+            <li><a href="{% url 'index'%}">Home</a></li>
+            <li><a href="{% url 'account'%}">Account</a></li>
+            <li>Info update</li>
+        </ol>
+        <h2>Info update</h2>
+        </div>
+    </section>
+    <!-- End Breadcrumbs -->
+    <!--update form-->
+    <div class="container">
+        {% include 'partials/_alerts.html' %}
+        <br>
+        <form action="{% url 'info_update' %}" method="POST" >
+            {% csrf_token %}
+            <br>
+            <div class="col-md-4 mb-3">
+                Username: 
+                <input
+                  type="text" name="username" class="form-control" placeholder="Username" value = "{{user.username}}"
+                />
+            </div>
+            <br>
+            <div class="col-md-4 mb-3">
+                Email: 
+                <input
+                  type="email" name="email" class="form-control" placeholder="Email" value = "{{user.email}}"
+                />
+                <small class="form-text text-muted">your email will not be shared</small>
+            </div>
+            <div class="col-md-4 mb-3">
+                Old password: 
+                <input
+                  type="password" name="oldpass" class="form-control" placeholder="Old password"
+                />
+            </div>
+            <br>
+            <div class="col-md-4 mb-3">
+                New Password: 
+                <input
+                  type="password"
+                  name="password1"
+                  class="form-control"
+                  placeholder="New password"
+                />
+             </div>
+            <br>
+            <div class="col-md-4 mb-3">
+                Confirm your password: 
+                <input
+                  type="password"
+                  name="password2"
+                  class="form-control"
+                  placeholder="Enter your new password again"
+                />
+              </div>
+            <br>
+            <div class="col-md-4 mb-3">
+                Phone Number: 
+                <input
+                  type="text"
+                  name="phone"
+                  class="form-control"
+                  placeholder="Phone number"
+                />
+            </div>
+            <br>
+            <div class="col-md-4 mb-3">
+                Credit Card: 
+                <input
+                  type="text"
+                  name="credit_card"
+                  class="form-control"
+                  placeholder="Credit Card"
+                />
+            </div>
+            <br>
+            <div class="col-md-4 mb-3">
+                Country: 
+                <input
+                  type="text"
+                  name="country"
+                  class="form-control"
+                  placeholder="Country"
+                />
+            </div>
+            <br>
+            <input type="submit" value="Confirm Changes" class="btn btn-secondary btn-block" />
+        </form>
+    </div>
+    <br>
+{% endblock%}

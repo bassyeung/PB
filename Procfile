@@ -1,0 +1,1 @@
+web: gunicorn PandoraBox.wsgi --log-file -
